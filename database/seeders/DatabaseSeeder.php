@@ -18,10 +18,11 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Create admin user
-        User::factory()->create([
+        User::create([
             'name' => 'Admin Arimbi',
             'email' => 'admin@arimbi.store',
             'password' => bcrypt('admin'),
+            'email_verified_at' => now(),
         ]);
 
         // Create sample categories
