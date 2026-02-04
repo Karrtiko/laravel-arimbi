@@ -21,12 +21,16 @@ if [ ! -f database/database.sqlite ]; then
 fi
 
 # Ensure permissions
+# Relaxed permissions for Linux/Docker compatibility (SQLite needs directory write access)
+chmod -R 777 database
+chmod -R 777 storage
+chmod -R 777 bootstrap/cache
+
+if [ -f database/database.sqlite ]; then
+    chmod 666 database/database.sqlite
+fi
 chown -R www-data:www-data database
 chown -R www-data:www-data storage
-chmod -R 775 storage
-chmod -R 775 bootstrap/cache
-touch database/database.sqlite
-chmod 664 database/database.sqlite
 
 # Cache configuration
 php artisan config:clear
