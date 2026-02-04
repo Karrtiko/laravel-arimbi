@@ -1,0 +1,27 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: arimbi-store:latest
+    container_name: arimbi_app
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      # Bind mount code for easy updates ("git pull" on host updates container)
+      - ./:/var/www
+      # Bind mount database explicitly to ensure persistence
+      - ./database/database.sqlite:/var/www/database/database.sqlite
+    environment:
+      - APP_ENV=production
+      - APP_DEBUG=false
+      - APP_KEY=${APP_KEY}
+      - DB_CONNECTION=sqlite
+      # Ensure permissions usually align if user on host is 1000
+    networks:
+      - arimbi_net
+
+networks:
+  arimbi_net:
+    driver: bridge
