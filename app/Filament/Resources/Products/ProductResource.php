@@ -36,14 +36,15 @@ class ProductResource extends Resource
                                     ->dehydrated()
                                     ->unique(ignoreRecord: true),
                                 Forms\Components\Select::make('category_id')
-                                    ->label('Category')
-                                    ->options(\App\Models\Category::pluck('name', 'id'))
+                                    ->relationship('category', 'name')
                                     ->searchable()
+                                    ->preload()
                                     ->required(),
                                 Forms\Components\Select::make('country_id')
-                                    ->label('Origin Country')
-                                    ->options(\App\Models\Country::pluck('name', 'id'))
-                                    ->searchable(),
+                                    ->relationship('country', 'name')
+                                    ->searchable()
+                                    ->preload()
+                                    ->label('Origin Country'),
                                 Forms\Components\Textarea::make('description')
                                     ->columnSpanFull(),
                             ]),
