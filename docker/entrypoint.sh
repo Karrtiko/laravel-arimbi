@@ -32,17 +32,16 @@ fi
 chown -R www-data:www-data database
 chown -R www-data:www-data storage
 
-# Cache configuration
+# Run Migrations FIRST (before cache commands, because cache table might not exist)
+echo "Running migrations..."
+php artisan migrate --force
+
+# Cache configuration (after migrations so tables exist)
 php artisan config:clear
-php artisan cache:clear
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
 php artisan storage:link
-
-# Run Migrations
-echo "Running migrations..."
-php artisan migrate --force
 
 # Start Nginx
 echo "Starting Nginx..."
