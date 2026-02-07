@@ -52,5 +52,12 @@ class DatabaseSeeder extends Seeder
         foreach ($countries as $country) {
             Country::create($country);
         }
+
+        // Call other seeders
+        $this->call([
+            GeneralSettingSeeder::class,
+            InvoiceSettingSeeder::class,
+            MessageTemplateSeeder::class,
+        ]);
     }
 }
