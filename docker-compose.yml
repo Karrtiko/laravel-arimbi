@@ -11,8 +11,7 @@ services:
     volumes:
       # Bind mount code for easy updates ("git pull" on host updates container)
       - ./:/var/www
-      # Bind mount database explicitly to ensure persistence
-      - ./database/database.sqlite:/var/www/database/database.sqlite
+      # database.sqlite persistence handled by ./:/var/www mount above
     environment:
       - APP_ENV=production
       - APP_DEBUG=false
