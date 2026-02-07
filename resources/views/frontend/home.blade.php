@@ -37,14 +37,18 @@
             <h3>Mau 'Jalan-Jalan' ke mana hari ini?</h3>
             <p>Pilih negara favorit mu, cari temukan oleh-oleh khasnya</p>
             <div class="country-tabs">
-                <a href="{{ route('shop') }}" class="country-tab active">
-                    <span class="flag"
-                        style="background: linear-gradient(135deg, #8b5cf6, #6366f1); display: flex; align-items: center; justify-content: center; color: white;">✦</span>
+                @php
+                    $currentCountry = request()->get('country');
+                @endphp
+
+                <a href="{{ route('shop') }}" class="country-tab {{ !$currentCountry ? 'active' : '' }}">
+                    <span class="flag">🌏</span>
                     <span>Semua</span>
                 </a>
                 @foreach($countries as $country)
-                    <a href="{{ route('shop', ['country' => $country->code]) }}" class="country-tab">
-                        <span class="flag">{{ $country->flag ?? '🌍' }}</span>
+                    <a href="{{ route('shop', ['country' => $country->slug]) }}"
+                        class="country-tab {{ $currentCountry == $country->slug ? 'active' : '' }}">
+                        <span class="flag">{{ $country->emoji ?? '🌍' }}</span>
                         <span>{{ $country->name }}</span>
                     </a>
                 @endforeach

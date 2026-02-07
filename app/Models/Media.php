@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
+
 class Media extends Model
 {
     use HasFactory;
@@ -26,4 +27,6 @@ class Media extends Model
     {
         return $this->morphTo();
     }
+
+
 }

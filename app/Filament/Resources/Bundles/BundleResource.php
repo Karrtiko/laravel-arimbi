@@ -121,6 +121,7 @@ class BundleResource extends Resource
                                             ->image()
                                             ->disk('public')
                                             ->directory('bundles')
+                                            ->visibility('public')
                                             ->required(),
                                         Forms\Components\Toggle::make('is_thumbnail')
                                             ->label('Thumbnail?')
@@ -142,9 +143,13 @@ class BundleResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('media.file_path')
+                Tables\Columns\ImageColumn::make('thumbnail')
                     ->label('Thumbnail')
-                    ->limit(1)
+                    ->getStateUsing(function ($record) {
+                        $media = $record->media()->orderBy('sort_order')->first();
+                        return $media ? 'storage/' . $media->file_path : null;
+                    })
+                    ->disk('public')
                     ->circular(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()

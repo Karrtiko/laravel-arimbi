@@ -326,36 +326,39 @@ h4 {
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    padding: 12px 16px;
+    padding: 16px 20px;
     border-radius: var(--radius);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.3s ease;
     text-decoration: none;
-    color: var(--gray-600);
+    color: var(--gray-700);
+    background: white;
+    border: 2px solid var(--gray-200);
+    min-width: 80px;
 }
 
-.country-tab:hover,
-.country-tab.active {
-    background: var(--gray-100);
-    color: var(--gray-900);
+.country-tab:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
 }
 
 .country-tab.active {
-    background: var(--primary);
+    background: var(--primary-gradient);
     color: white;
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
 }
 
 .country-tab img,
 .country-tab .flag {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    object-fit: cover;
+    font-size: 32px;
+    line-height: 1;
 }
 
-.country-tab span {
-    font-size: 12px;
-    font-weight: 500;
+.country-tab span:last-child {
+    font-size: 13px;
+    font-weight: 600;
 }
 
 /* Section */
@@ -1323,4 +1326,386 @@ h4 {
     font-weight: 500;
     color: var(--gray-900);
     cursor: pointer;
+}
+/* ========================================
+   Social Share Buttons
+   ======================================== */
+.share-section {
+    margin-top: 32px;
+    padding: 24px;
+    background: var(--gray-50);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--gray-200);
+}
+
+.share-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-700);
+    margin-bottom: 16px;
+}
+
+.share-buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+}
+
+.share-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    border: 2px solid var(--gray-200);
+    background: white;
+    color: var(--gray-700);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.share-btn svg {
+    flex-shrink: 0;
+}
+
+.share-btn span {
+    white-space: nowrap;
+}
+
+/* Platform-specific colors */
+.share-whatsapp:hover {
+    background: #25D366;
+    border-color: #25D366;
+    color: white;
+}
+
+.share-telegram:hover {
+    background: #0088cc;
+    border-color: #0088cc;
+    color: white;
+}
+
+.share-line:hover {
+    background: #00B900;
+    border-color: #00B900;
+    color: white;
+}
+
+.share-facebook:hover {
+    background: #1877F2;
+    border-color: #1877F2;
+    color: white;
+}
+
+.share-twitter:hover {
+    background: #000000;
+    border-color: #000000;
+    color: white;
+}
+
+.share-copy:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.share-email:hover {
+    background: var(--gray-700);
+    border-color: var(--gray-700);
+    color: white;
+}
+
+/* Toast Notification */
+.toast-notification {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    background: var(--gray-900);
+    color: white;
+    padding: 16px 24px;
+    border-radius: var(--radius);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    animation: slideInUp 0.3s ease, fadeOut 0.3s ease 2.7s;
+    font-size: 14px;
+    font-weight: 500;
+    max-width: 300px;
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .share-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .toast-notification {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+    }
+}
+
+/* ========================================
+   Floating Share Button on Image
+   ======================================== */
+.floating-share-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.floating-share-btn:hover {
+    background: var(--primary);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+}
+
+.floating-share-btn svg {
+    color: var(--primary);
+    transition: color 0.3s ease;
+}
+
+.floating-share-btn:hover svg {
+    color: white;
+}
+
+/* ========================================
+   Share Modal Popup
+   ======================================== */
+.share-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.2s ease;
+}
+
+.share-modal.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.share-modal-content {
+    background: white;
+    border-radius: var(--radius-lg);
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.share-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 24px 16px;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.share-modal-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--gray-900);
+}
+
+.share-modal-close {
+    background: none;
+    border: none;
+    font-size: 32px;
+    line-height: 1;
+    color: var(--gray-400);
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.share-modal-close:hover {
+    background: var(--gray-100);
+    color: var(--gray-700);
+}
+
+.share-modal-body {
+    padding: 24px;
+}
+
+.share-buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.share-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px 16px;
+    border-radius: var(--radius);
+    border: 2px solid var(--gray-200);
+    background: white;
+    color: var(--gray-700);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.share-btn svg {
+    flex-shrink: 0;
+}
+
+/* Platform-specific hover colors */
+.share-whatsapp:hover {
+    background: #25D366;
+    border-color: #25D366;
+    color: white;
+}
+
+.share-telegram:hover {
+    background: #0088cc;
+    border-color: #0088cc;
+    color: white;
+}
+
+.share-line:hover {
+    background: #00B900;
+    border-color: #00B900;
+    color: white;
+}
+
+.share-facebook:hover {
+    background: #1877F2;
+    border-color: #1877F2;
+    color: white;
+}
+
+.share-twitter:hover {
+    background: #000000;
+    border-color: #000000;
+    color: white;
+}
+
+.share-copy:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.share-email:hover {
+    background: var(--gray-700);
+    border-color: var(--gray-700);
+    color: white;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .share-modal-content {
+        width: 95%;
+    }
+    
+    .floating-share-btn {
+        width: 40px;
+        height: 40px;
+        top: 12px;
+        right: 12px;
+    }
+    
+    .floating-share-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+
+/* Instagram & TikTok hover colors */
+.share-instagram:hover {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    border-color: #dc2743;
+    color: white;
+}
+
+.share-tiktok:hover {
+    background: #000000;
+    border-color: #00f2ea;
+    color: #00f2ea;
 }

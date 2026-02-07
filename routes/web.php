@@ -14,3 +14,17 @@ Route::get('/package/{slug}', [FrontendController::class, 'package'])->name('pac
 // Invoice routes
 Route::get('/invoice/{order}', [InvoiceController::class, 'show'])->name('invoice.show');
 Route::get('/invoices/bulk', [InvoiceController::class, 'bulk'])->name('invoice.bulk');
+
+// Watermark image serving - DISABLED temporarily due to routing conflict
+// TODO: Re-enable after fixing route pattern to be more specific
+// Route::get('/storage/watermarked/{path}', [App\Http\Controllers\Admin\WatermarkController::class, 'serve'])
+//     ->where('path', '.*')
+//     ->name('watermark.serve');
+
+// Admin watermark management routes
+Route::middleware(['auth'])->prefix('admin')->name('watermark.')->group(function () {
+    Route::get('/watermark', [App\Http\Controllers\Admin\WatermarkController::class, 'index'])->name('index');
+    Route::post('/watermark', [App\Http\Controllers\Admin\WatermarkController::class, 'update'])->name('update');
+    Route::post('/watermark/clear', [App\Http\Controllers\Admin\WatermarkController::class, 'clearCache'])->name('clear');
+    Route::post('/watermark/cleanup', [App\Http\Controllers\Admin\WatermarkController::class, 'cleanupUnused'])->name('cleanup');
+});

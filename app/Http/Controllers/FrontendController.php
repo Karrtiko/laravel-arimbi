@@ -53,7 +53,7 @@ class FrontendController extends Controller
 
         // Filter by country
         if ($request->filled('country')) {
-            $query->whereHas('country', fn($q) => $q->where('code', $request->country));
+            $query->whereHas('country', fn($q) => $q->where('slug', $request->country));
         }
 
         // Search

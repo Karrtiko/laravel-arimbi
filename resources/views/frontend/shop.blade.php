@@ -33,14 +33,13 @@
                 <div class="country-tabs" style="justify-content: flex-start; gap: 16px;">
                     <a href="{{ route('shop', array_merge(request()->except('country'), [])) }}"
                         class="country-tab {{ !request('country') ? 'active' : '' }}">
-                        <span class="flag"
-                            style="background: linear-gradient(135deg, #8b5cf6, #6366f1); display: flex; align-items: center; justify-content: center; color: white; font-size: 14px;">✦</span>
+                        <span class="flag">🌏</span>
                         <span>Semua</span>
                     </a>
                     @foreach($countries as $country)
-                        <a href="{{ route('shop', array_merge(request()->except('country'), ['country' => $country->code])) }}"
-                            class="country-tab {{ request('country') == $country->code ? 'active' : '' }}">
-                            <span class="flag">{{ $country->flag ?? '🌍' }}</span>
+                        <a href="{{ route('shop', array_merge(request()->except('country'), ['country' => $country->slug])) }}"
+                            class="country-tab {{ request('country') == $country->slug ? 'active' : '' }}">
+                            <span class="flag">{{ $country->emoji ?? '🌍' }}</span>
                             <span>{{ $country->name }}</span>
                         </a>
                     @endforeach
@@ -89,7 +88,7 @@
                                     <span class="cat">🏷️ {{ strtoupper($product->category->name) }}</span>
                                 @endif
                                 @if($product->country)
-                                    <span class="country">{{ $product->country->flag ?? '' }} {{ $product->country->name }}</span>
+                                    <span class="country">{{ $product->country->emoji ?? '' }} {{ $product->country->name }}</span>
                                 @endif
                             </div>
                             <h4>{{ $product->name }}</h4>
