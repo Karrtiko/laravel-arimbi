@@ -35,16 +35,6 @@ class ProductResource extends Resource
                                     ->hidden()
                                     ->dehydrated()
                                     ->unique(ignoreRecord: true),
-                                Forms\Components\Select::make('category_id')
-                                    ->relationship('category', 'name')
-                                    ->searchable()
-                                    ->preload()
-                                    ->required(),
-                                Forms\Components\Select::make('country_id')
-                                    ->relationship('country', 'name')
-                                    ->searchable()
-                                    ->preload()
-                                    ->label('Origin Country'),
                                 Forms\Components\Textarea::make('description')
                                     ->columnSpanFull(),
                             ]),
@@ -110,9 +100,6 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('category.name')
-                    ->sortable()
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('price')
                     ->money('IDR')
                     ->sortable(),

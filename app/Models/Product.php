@@ -23,8 +23,6 @@ class Product extends Model
     }
 
     protected $fillable = [
-        'category_id',
-        'country_id',
         'name',
         'slug',
         'description',
@@ -39,16 +37,6 @@ class Product extends Model
         'is_active' => 'boolean',
         'price' => 'decimal:2',
     ];
-
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class);
-    }
-
-    public function country(): BelongsTo
-    {
-        return $this->belongsTo(Country::class);
-    }
 
     public function media(): \Illuminate\Database\Eloquent\Relations\MorphMany
     {
